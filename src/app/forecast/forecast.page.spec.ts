@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
 import { ForecastPage } from './forecast.page';
@@ -10,7 +11,8 @@ describe('ForecastPage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ForecastPage],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ForecastPage);

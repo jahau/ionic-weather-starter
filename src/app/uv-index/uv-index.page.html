@@ -1,9 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Three
+      UV Index
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content class="ion-padding ion-text-center">
+  <kws-uv-index class="primary-value" [uvIndex]="uvIndex?.value"></kws-uv-index>
+  <div class="description">{{ advice[(uvIndex?.riskLevel)] }}</div>
+</ion-content>
