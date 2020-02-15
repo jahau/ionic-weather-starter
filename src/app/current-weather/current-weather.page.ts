@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { IconMapService, WeatherService } from '@app/services';
 import { Weather } from '@app/models';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-current-weather',
@@ -11,9 +12,18 @@ import { Weather } from '@app/models';
 export class CurrentWeatherPage {
   currentWeather: Weather;
 
-  constructor(public iconMap: IconMapService, private weather: WeatherService) {}
+  constructor(
+    public iconMap: IconMapService,
+    private loadingController: LoadingController,
+    private weather: WeatherService
+  ) {}
 
-  ionViewDidEnter() {
-    this.weather.current().subscribe(w => this.currentWeather = w);
+  async ionViewDidEnter() {
+    const loading = await this.loadingController.create({ message: 'Getting Current Weather' });
+    await loading.present();
+    this.weather.current().subscribe(w => {
+      this.currentWeather = w;
+      loading.dismiss();
+    });
   }
 }
